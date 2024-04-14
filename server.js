@@ -9,6 +9,22 @@
 const path = require('path')
 const express = require('express')
 const app = express()
+
+// redirect http to https
+app.use(function requireHTTPS(req, res, next) {
+  if (!req.secure) {
+    return res.redirect('https://' + req.headers.host + req.url);
+  }
+  next();
+});
+
+// redirect chapalbarua.com to www.chapalbarua.com
+app.use(function requireWWW(req, res, next) {
+  if(!req.headers.host.startsWith('www.')){
+    return res.redirect('https://' + 'www.' + req.headers.host + req.url);
+  }
+  next();
+});
 var fs = require('fs');
 var options = {
   key: fs.readFileSync('helpers/secrets/certs/cert.key'),
