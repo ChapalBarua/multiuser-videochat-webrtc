@@ -19,8 +19,9 @@ var options = {
 //   key: fs.readFileSync('/home/ec2-user/secrets/certs/cert.key'),
 //   cert: fs.readFileSync('/home/ec2-user/secrets/certs/cert.crt')
 // };
-const server = require('https').createServer(app, options);
-const io = require('socket.io').listen(server)
+
+const server = require('https').createServer(options, app);
+const io = require('socket.io')(server)
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
