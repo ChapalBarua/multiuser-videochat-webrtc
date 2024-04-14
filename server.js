@@ -72,7 +72,7 @@ io.on('connection', (socket) => {
 })
 
 // START THE SERVER =================================================================
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 server.listen(port, () => {
   console.log(`Express server listening on port ${port}`)
 })
